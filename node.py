@@ -8,15 +8,56 @@ class Node:
         self.puzzle = puzzle
         self.depth = depth
         self.cost = cost
-    
+        
     def make_children(self):
         
         children = []
-        temp = 0
+        temp1 = []
         curr_row = 0
         curr_column = 0
+        rows = len(self.puzzle)
+        cols = len(self.puzzle[0])
+        idrow = -1
+        idcol = -1
         
-        temp = newNode[2323][23] 
+        #search for the 0 in puzzle
+        for i in range(rows):
+            for j in range(cols):
+                if self.puzzle[i][j] == 0:
+                    idrow = i
+                    idcol = j
+                    
+        #up child
+        if idrow != 0:
+            temp1 = self.puzzle
+            temp1[idrow][idcol] = self.puzzle[idrow-1][idcol]
+            temp1[idrow-1][idcol] = 0
+            children.append(Node(temp1, self.depth+1, self.cost))
+            
+        #down child
+        if idrow != 2:
+            temp1 = self.puzzle
+            temp1[idrow][idcol] = self.puzzle[idrow+1][idcol]
+            temp1[idrow+1][idcol] = 0
+            children.append(Node(temp1, self.depth+1, self.cost))
+            
+        #left child
+        if idcol != 0:
+            temp1 = self.puzzle
+            temp1[idrow][idcol] = self.puzzle[idrow][idcol-1]
+            temp1[idrow][idcol-1] = 0
+            children.append(Node(temp1, self.depth+1, self.cost))
+            
+        #right child
+        if idcol != 2:
+            temp1 = self.puzzle
+            temp1[idrow][idcol] = self.puzzle[idrow][idcol+1]
+            temp1[idrow][idcol+1] = 0
+            children.append(Node(temp1, self.depth+1, self.cost))
+        
+        return children
+
+
         
         
     def misplaced_tiles(self):
