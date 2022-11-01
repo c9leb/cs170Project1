@@ -13,8 +13,6 @@ class Node:
         
         children = []
         temp1 = []
-        curr_row = 0
-        curr_column = 0
         rows = len(self.puzzle)
         cols = len(self.puzzle[0])
         idrow = -1
@@ -57,9 +55,35 @@ class Node:
         
         return children
 
-
-        
         
     def misplaced_tiles(self):
+        goal = [[1, 2, 3], [4, 5, 6], [7, 8, 0]]
+        rows = len(self.puzzle)
+        cols = len(self.puzzle[0])
+        count = 0
         
+        for i in range(rows):
+            for j in range(cols):
+                if ((self.puzzle[i][j] != goal[i][j]) and (self.puzzle[i][j] != 0)):
+                    count+=1
+                    
+        return count
+                    
     def manhattan(self):
+        goal = [[1, 2, 3], [4, 5, 6], [7, 8, 0]]
+        rows = len(self.puzzle)
+        cols = len(self.puzzle[0])
+        total = 0
+        
+        for i in range(rows):
+            for j in range(cols):
+                if ((self.puzzle[i][j] != goal[i][j]) and (self.puzzle[i][j] != 0)):
+                    temp1 = self.puzzle[i][j]
+                    for l in range(rows):
+                        for m in range(cols):
+                            if temp1 == goal[l][m]:
+                                total+=abs(l-i)
+                                total+=abs(m-j)
+        return total
+                                
+        
