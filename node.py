@@ -11,7 +11,7 @@ class Node:
         
     def make_children(self):
         
-        children = []
+        children = set()
         temp1 = []
         rows = len(self.puzzle)
         cols = len(self.puzzle[0])
@@ -30,28 +30,28 @@ class Node:
             temp1 = self.puzzle
             temp1[idrow][idcol] = self.puzzle[idrow-1][idcol]
             temp1[idrow-1][idcol] = 0
-            children.append(Node(temp1, self.depth+1, self.cost))
+            children.add(Node(temp1, self.depth+1, self.cost+1))
             
         #down child
         if idrow != 2:
             temp1 = self.puzzle
             temp1[idrow][idcol] = self.puzzle[idrow+1][idcol]
             temp1[idrow+1][idcol] = 0
-            children.append(Node(temp1, self.depth+1, self.cost))
+            children.add(Node(temp1, self.depth+1, self.cost+1))
             
         #left child
         if idcol != 0:
             temp1 = self.puzzle
             temp1[idrow][idcol] = self.puzzle[idrow][idcol-1]
             temp1[idrow][idcol-1] = 0
-            children.append(Node(temp1, self.depth+1, self.cost))
+            children.add(Node(temp1, self.depth+1, self.cost+1))
             
         #right child
         if idcol != 2:
             temp1 = self.puzzle
             temp1[idrow][idcol] = self.puzzle[idrow][idcol+1]
             temp1[idrow][idcol+1] = 0
-            children.append(Node(temp1, self.depth+1, self.cost))
+            children.add(Node(temp1, self.depth+1, self.cost+1)
         
         return children
 
@@ -85,5 +85,12 @@ class Node:
                                 total+=abs(l-i)
                                 total+=abs(m-j)
         return total
+        
+    def solved(self):
+        goal = [[1, 2, 3], [4, 5, 6], [7, 8, 0]]
+        if(goal == self.puzzle):
+            return 1
+        else:
+            return 0 
                                 
         
