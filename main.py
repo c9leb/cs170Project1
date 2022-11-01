@@ -1,4 +1,5 @@
 
+import treelib
 import heapq as min_heap_esque_queue
 
 # because it sort of acts like a min heap
@@ -33,8 +34,6 @@ eight_goal_state = [[1, 2, 3],
 
 def main():
     
-    tree = Tree()
-    
     puzzle_mode = input("Welcome to an 8 Puzzle Solver. Type '1' to use a default puzzle, or '2' to create your own." + '\n')
     if puzzle_mode == "1":
         select_and_init_algorithm(init_default_puzzle_mode())
@@ -49,6 +48,7 @@ def main():
         puzzle_row_one = puzzle_row_one.split()
         puzzle_row_two = puzzle_row_two.split()
         puzzle_row_three = puzzle_row_three.split()
+        
         for i in range(0, 3):
             puzzle_row_one[i] = int(puzzle_row_one[i])
             puzzle_row_two[i] = int(puzzle_row_two[i])
@@ -95,7 +95,7 @@ def select_and_init_algorithm(puzzle):
         uniform_cost_search(puzzle, 1)
 def uniform_cost_search(puzzle, heuristic):
     
-    starting_node = TreeNode.TreeNode(None, puzzle, 0, 0)
+    starting_node = 3
     working_queue = []
     repeated_states = dict()
     min_heap_esque_queue.heappush(working_queue, starting_node)
