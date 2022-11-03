@@ -61,7 +61,7 @@ class Node:
             temp1 = copy.deepcopy(self.puzzle)
             temp1[idrow][idcol] = self.puzzle[idrow-1][idcol]
             temp1[idrow-1][idcol] = 0
-            if(temp1 not in expanded):
+            if(Node.convert(temp1) not in expanded):
                 self.childup = (Node(temp1))
                 self.childup.depth = self.depth + 1
                 if(heuristic == 0):
@@ -76,7 +76,7 @@ class Node:
             temp2 = copy.deepcopy(self.puzzle)
             temp2[idrow][idcol] = self.puzzle[idrow+1][idcol]
             temp2[idrow+1][idcol] = 0
-            if(temp2 not in expanded):
+            if(Node.convert(temp2) not in expanded):
                 self.childdown = (Node(temp2))
                 self.childdown.depth = self.depth + 1
                 if(heuristic == 0):
@@ -91,7 +91,7 @@ class Node:
             temp3 = copy.deepcopy(self.puzzle)
             temp3[idrow][idcol] = self.puzzle[idrow][idcol-1]
             temp3[idrow][idcol-1] = 0
-            if(temp3 not in expanded):
+            if(Node.convert(temp3) not in expanded):
                 self.childleft = (Node(temp3))
                 self.childleft.depth = self.depth + 1
                 if(heuristic == 0):
@@ -106,7 +106,7 @@ class Node:
             temp4 = copy.deepcopy(self.puzzle)
             temp4[idrow][idcol] = self.puzzle[idrow][idcol+1]
             temp4[idrow][idcol+1] = 0
-            if(temp4 not in expanded):
+            if(Node.convert(temp4) not in expanded):
                 self.childright = (Node(temp4))
                 self.childright.depth = self.depth + 1
                 if(heuristic == 0):
@@ -131,4 +131,8 @@ class Node:
         g = [list(range(1 + dim * i, 1 + dim * (i + 1))) for i in range(dim)]
         g[dim-1][dim-1] = 0
         return g              
+    
+    #converts a the puzzle to a tuple to be used in a set - used material from https://www.geeksforgeeks.org/python-convert-list-of-lists-to-tuple-of-tuples/
+    def convert(puzzle):
+        return(tuple(tuple(i) for i in puzzle))                  
         
