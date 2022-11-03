@@ -12,7 +12,8 @@ class Node:
         self.childdown = 0
         self.childleft = 0
         self.childright = 0
-        
+    
+    #misplaced tiles funtion to calculate the heuristic cost of a given node         
     def misplaced_tiles(self, goal):
         rows = len(self.puzzle)
         cols = len(self.puzzle[0])
@@ -24,7 +25,8 @@ class Node:
                     count+=1
                     
         return count
-                    
+    
+    #manhattan distance funtion to calculate the heuristic cost of a given node                
     def manhattan(self, goal):
         rows = len(self.puzzle)
         cols = len(self.puzzle[0])
@@ -40,7 +42,9 @@ class Node:
                                 total+=abs(l-i)
                                 total+=abs(m-j)
         return total
-              
+    
+    #makes children for each operator and sets them to the children of self
+    #takes in parent node, set of already expanded nodes, wanted heuristic to calculate heuristic cost and goal state          
     def make_children(self, expanded, heuristic, goal):
         
         temp1 = []
@@ -119,6 +123,7 @@ class Node:
         
         return
 
+    #checks self puzzle against goal puzzle
     def solved(self, goal):
         if(goal == self.puzzle):
             return 1
